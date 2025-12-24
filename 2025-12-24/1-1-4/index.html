@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>구구단 JS</h2>
+    <script>
+      // function prompt(dan) {
+      //   if (dan < 2 || dan > 9) return "2~9 사이 숫자를 입력하세요";
+      //   for (let i = 1; i < 10; i++) {
+      //     console.log(`${dan} X ${i} = ${dan * i}`);
+      //   }
+      // }
+      // prompt(9);
+
+      const input = prompt("숫자를 입력하세요");
+      const num = Number(input);
+      if (num >= 2 && num <= 9) {
+      } else {
+        console.log("2~9 사이 숫자를 입력하세요");
+      }
+      for (let i = 1; i <= 9; i++) {
+        console.log(`${num} X ${i} = ${num * i}`);
+      }
+    </script>
+  </body>
+</html>
