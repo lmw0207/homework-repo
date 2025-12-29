@@ -5,5 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h2>251229-1-2-2과제</h2>
+    <script>
+      const cart = [];
+      cart.push({ name: "사과", price: 3000 });
+      cart.push({ name: "수박", price: 6000 });
+      cart.push({ name: "딸기", price: 9000 });
+
+      // console.log(cart); // 사과, 수박, 딸기
+
+      // cart.indexOf("수박");
+      cart.splice(1, 1); // 수박 삭제
+      // console.log(cart); // 사과, 딸기
+
+      // const idx = cart.findIndex((item) => item.name === "수박");
+      // if (idx !== -1) cart.splice(idx, 1); // 이해가 잘 안되는 부분 (indexOf)
+
+      cart.sort((a, b) => a.price - b.price);
+      console.log(cart.map((i) => i.name).join(" , ")); // map은 갑자기 어디서 나온거지..
+
+      //---------------------------------힌트 풀이 ----------------------------------------
+      // const cart = [];
+      // cart.push({ name: "사과", price: 1000 });
+      // cart.push({ name: "바나나", price: 500 });
+
+      // const idx = cart.findIndex((item) => item.name === "사과");
+      // if (idx !== -1) cart.splice(idx, 1);
+
+      // cart.sort((a, b) => a.price - b.price);
+      // console.log(cart.map((i) => i.name).join(", "));
+    </script>
+  </body>
 </html>
