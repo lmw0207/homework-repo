@@ -16,8 +16,13 @@
           case "-":
             return a - b;
             break;
+          case "*":
+            return a * b;
+            break;
           case "/":
-            if (b === 0) return "0으로 나눌 수 없습니다";
+            if (b === 0) {
+              return "0으로 나눌 수 없습니다";
+            }
             return a / b;
             break;
           default:
@@ -28,6 +33,9 @@
       console.log(calculate(10, 5, "-"));
       console.log(calculate(10, 5, "/"));
       console.log(calculate(10, 5, "*"));
+
+      console.log(calculate(10, 0, "/")); // "0으로 나눌 수 없습니다"
+      console.log(calculate(10, 5, "%")); // "잘못된 연산자"
     </script>
   </body>
 </html>
