@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>학생 정보 객체 관리하기</h1>
+    <script>
+      {
+        // 객체 생성
+        const info = {
+          name: "홍길동",
+          age: 18,
+          scores: {
+            math: 60,
+            english: 75,
+          },
+        };
+        const key = "name";
+        console.log(info.scores.math);
+
+        // 동적 접근
+        function getProperty(obj, key) {
+          return obj[key];
+        }
+        console.log(info[key]);
+
+        // 깊은 복사
+        const copy1 = JSON.parse(JSON.stringify(info));
+        copy1.scores.math = 75;
+        console.log(copy1.scores.math);
+      }
+    </script>
+  </body>
+</html>
