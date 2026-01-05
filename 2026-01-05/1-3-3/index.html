@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이벤트 위임 - 버튼 그룹 효율적으로 관리하기</title>
+  </head>
+  <body>
+    <div class="button-group">
+      <button data-action="Add">추가</button>
+      <button data-action="Edit">수정</button>
+      <button data-action="Delete">삭제</button>
+    </div>
+    <script>
+      const buttonGroup = document.querySelector(".button-group");
+      buttonGroup.addEventListener("click", handleClick);
+      function handleClick(e) {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        const action = btn.dataset.action;
+        console.log(action, "Clicked");
+      }
+    </script>
+  </body>
+</html>
