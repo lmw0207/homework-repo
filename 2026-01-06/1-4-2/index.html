@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>레거시 코드 청산하기</h1>
+    <!-- <script>
+    
+      var defaultSettings = {
+        theme: "blue",
+        showSidebar: true,
+      };
+
+      // 1. 설정 병합 함수
+      var updateSettings = function (userSettings) {
+        // 수동 병합 (복잡함)
+        var final = {};
+        final.theme = userSettings.theme || defaultSettings.theme;
+        final.showSidebar =
+          userSettings.showSidebar || defaultSettings.showSidebar;
+
+        // 2. 결과 출력
+        console.log("테마: " + final.theme);
+        return final;
+      };
+    </script> -->
+    <script>
+      const defaultSettings = {
+        theme: "blue",
+        showSidebar: true,
+      };
+
+      // 1. 설정 병합 함수
+      const updateSettings = (userSettings) =>
+        // 수동 병합 (복잡함)
+        ({ ...defaultSettings, ...userSettings });
+
+      // 2. 결과 출력
+      const { theme } = updateSettings({ theme: "dark" });
+      console.log(`테마: ${theme}`);
+    </script>
+  </body>
+</html>
