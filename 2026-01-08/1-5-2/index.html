@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>카페 주문 흐름 시뮬레이션</h1>
+    <script>
+      console.log("1. 가게 오픈");
+
+      setTimeout(() => {
+        console.log("2. 일반 손님 주문 완료");
+      }, 1000);
+
+      Promise.resolve().then(() => {
+        console.log("3. VIP 손님 입장");
+      });
+
+      console.log("4. 재료 준비");
+      // 1. 콘솔에 찍히는 순서 = 1 → 4 → 3 → 2
+      // 2. 일반 손님보다 VIP가 왜 먼저 나오는지
+      //  = 일반 손님은 매크로태스크 큐이고, VIP 손님은 마이크로태스크 큐 이기에
+      //    마이크로태스크가 매크로태스크 보다 실행 순서의 우선권을 갖고 있어서 VIP가 먼저 나온다.
+      // 3. setTimeout이 1초로 늘리면 순서가 어떻게 변할지 예측
+      //  = 순서는 1 → 4 → 3 → 2 이지만, 1 → 4 → 3은 순서처럼 나오고 2는 1초 뒤에 출력된다?
+    </script>
+  </body>
+</html>
