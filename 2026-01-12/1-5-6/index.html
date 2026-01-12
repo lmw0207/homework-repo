@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./../../reset.css" />
+    <style>
+      body {
+        background-color: #1a110f;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        width: 1300px;
+      }
+      #todo-input {
+        box-sizing: border-box;
+        flex-grow: 1;
+        width: 600px;
+        height: 55px;
+        padding: 15px;
+        font-size: 18px;
+        border: 2px solid #a08c87;
+        background-color: #423734;
+        border-radius: 10px;
+        outline: none;
+      }
+      .input-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+      }
+      #todo-list {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        max-width: 650px;
+        color: wheat;
+        text-align: center;
+      }
+
+      #todo-list li {
+        margin-bottom: 10px;
+        padding: 10px;
+        background: #423734;
+        border-radius: 4px;
+      }
+
+      #add-btn {
+        background-color: #1a110f;
+        color: wheat;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      #add-btn:hover {
+        color: #ffd5a099;
+      }
+      /* #minus-btn {
+        width: 80px;
+        height: 50px;
+        color: black;
+        font-weight: 500;
+        background-color: #ffd5a099;
+        font-size: 28px;
+        border-radius: 10px;
+        border: 2px solid #a08c87;
+      }
+      #minus-btn:hover {
+        background-color: #ffd5a099;
+        background-color: red; 
+      }*/
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-box">
+        <input id="todo-input" type="text" placeholder="할 일 입력" />
+        <button id="add-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50px"
+            height="50px"
+            fill="currentColor"
+            class="bi bi-plus-circle-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"
+            />
+          </svg>
+        </button>
+      </div>
+      <ul id="todo-list"></ul>
+    </div>
+    <script>
+      const input = document.getElementById("todo-input");
+      const addbtn = document.getElementById("add-btn");
+      const minusbtn = document.getElementById("minus-btn");
+
+      addbtn.addEventListener("click", () => {
+        const text = input.value;
+        // 여기에 할 일 추가 로직 작성
+        if (text !== "") {
+          todos.push(text); // 배열에 추가
+          input.value = "";
+          // 입력창 비우기
+
+          // 저장하기
+          localStorage.setItem("todos", JSON.stringify(todos));
+          render();
+        }
+      });
+
+      // 불러오기 (OR 연산자로 빈 배열 처리)
+      const saved = localStorage.getItem("todos");
+      const todos = saved ? JSON.parse(saved) : [];
+
+      const list = document.getElementById("todo-list");
+
+      function render() {
+        list.innerHTML = ""; // 초기화
+        todos.forEach((todo) => {
+          const li = document.createElement("li");
+          li.textContent = todo;
+          list.appendChild(li);
+        });
+      }
+      localStorage.removeItem("li");
+    </script>
+  </body>
+</html>
