@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>배열 메서드로 데이터 가공하기</h1>
+    <script>
+      const arr = [5, 12, 8, 130, 44, 3];
+      const tenOver = arr.filter((n) => n > 10); // 12, 130, 44
+
+      const double = tenOver.map((n) => n * 2); // 24, 260, 88
+
+      const sorted = double.sort((a, b) => a - b); // 24, 88, 260, sort로 인해 원본도 변경
+      {
+        const all = arr
+          .filter((n) => n > 10)
+          .map((n) => n * 2)
+          .sort((a, b) => a - b);
+        console.log(all);
+      }
+
+      console.log(tenOver); // filter
+      console.log(double); // map
+      console.log(sorted); // sort
+    </script>
+  </body>
+</html>
