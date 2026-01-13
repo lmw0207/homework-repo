@@ -14,6 +14,12 @@
         align-items: center;
         min-height: 100vh;
       }
+      .title {
+        margin: 0 0 20px;
+        text-align: center;
+        font-size: 50px;
+        color: #a08c87;
+      }
       .container {
         display: flex;
         flex-direction: column;
@@ -25,7 +31,7 @@
       #todo-input {
         box-sizing: border-box;
         flex-grow: 1;
-        width: 600px;
+        width: 400px;
         height: 55px;
         padding: 15px;
         font-size: 18px;
@@ -43,8 +49,8 @@
       #todo-list {
         list-style: none;
         padding: 0;
-        width: 100%;
-        max-width: 650px;
+        /* width: 100%; */
+        /* max-width: 650px; */
         color: wheat;
         text-align: center;
       }
@@ -54,6 +60,14 @@
         padding: 10px;
         background: #423734;
         border-radius: 4px;
+      }
+      .todo-item {
+        width: 460px;
+        height: 70px;
+        justify-content: space-between;
+        display: flex;
+
+        align-items: center;
       }
 
       #add-btn {
@@ -66,26 +80,13 @@
       #add-btn:hover {
         color: #ffd5a099;
       }
-      /* #minus-btn {
-        width: 80px;
-        height: 50px;
-        color: black;
-        font-weight: 500;
-        background-color: #ffd5a099;
-        font-size: 28px;
-        border-radius: 10px;
-        border: 2px solid #a08c87;
-      }
-      #minus-btn:hover {
-        background-color: #ffd5a099;
-        background-color: red; 
-      }*/
     </style>
   </head>
   <body>
     <div class="container">
+      <h1 class="title">Todo List</h1>
       <div class="input-box">
-        <input id="todo-input" type="text" placeholder="할 일 입력" />
+        <input id="todo-input" type="text" placeholder="할 일을 입력 하시오." />
         <button id="add-btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -102,40 +103,89 @@
         </button>
       </div>
       <ul id="todo-list"></ul>
-    </div>
-    <script>
-      const input = document.getElementById("todo-input");
-      const addbtn = document.getElementById("add-btn");
-      const minusbtn = document.getElementById("minus-btn");
+      <script>
+        const todoInput = document.getElementById("todo-input");
+        const addBtn = document.getElementById("add-btn");
+        const todoList = document.getElementById("todo-list");
+        const TODO_KEY = "todos";
 
-      addbtn.addEventListener("click", () => {
-        const text = input.value;
-        // 여기에 할 일 추가 로직 작성
-        if (text !== "") {
-          todos.push(text); // 배열에 추가
-          input.value = "";
-          // 입력창 비우기
+        function saveTodo(todos) {
+          localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+        }
+        function loadTodos() {
+          const savedTodos = localStorage.getItem(TODO_KEY); // 없으면 null
+          return savedTodos ? JSON.parse(savedTodos) : [];
+        }
 
-          // 저장하기
-          localStorage.setItem("todos", JSON.stringify(todos));
+        function addTodo() {
+          const text = todoInput.value.trim();
+
+          if (!text) {
+            alert("할 일을 입력해 주세욥!");
+            return;
+            // text가 없다면 alert이 뜬다.
+          }
+          const todos = loadTodos(); // [ ]: 빈배열 또는 {"문자열"}
+          todos.push(text);
+          saveTodo(todos);
+
+          // const li = document.createElement("li");
+          // li.className = "todo-item"
+          // li.textContent = text;
+
+          todoInput.value = "";
+
           render();
         }
-      });
+        function deleteTodo(index) {
+          const todos = loadTodos();
+          const updateTodos = todos.filter((_, i) => index !== i);
+          saveTodo(updateTodos);
+          render();
+        }
+        function render() {
+          const todos = loadTodos();
+          todoList.innerHTML = "";
 
-      // 불러오기 (OR 연산자로 빈 배열 처리)
-      const saved = localStorage.getItem("todos");
-      const todos = saved ? JSON.parse(saved) : [];
+          todos.forEach((todo, index) => {
+            const li = document.createElement("li");
+            li.className = "todo-item";
+            li.textContent = todo;
 
-      const list = document.getElementById("todo-list");
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "delete-Btn";
+            deleteBtn.textContent = "삭제";
 
-      function render() {
-        list.innerHTML = ""; // 초기화
-        todos.forEach((todo) => {
-          const li = document.createElement("li");
-          li.textContent = todo;
-          list.appendChild(li);
-        });
-      }
-    </script>
+            deleteBtn.addEventListener("click", () => {
+              deleteTodo(index);
+            });
+            li.appendChild(deleteBtn);
+
+            todoList.appendChild(li);
+          });
+        }
+
+        addBtn.addEventListener("click", addTodo);
+        document.addEventListener("DOMContentLoaded", render);
+
+        // 1. 추가 버튼을 누르면 리스트가 추가
+        //  = 추가 버튼 필요하고, li 만들어서 인풋 데이터를 넣어주고, ul에 보내주기
+        //    추가 버튼에 클릭 이벤트 달아야함
+        //    addTodo 함수를 만들어서 작업
+
+        // 2. 추가한 목록이 배열로 로컬스토리지에 저장
+        //  = 할 일 입력된 글자들을 배열에 담아야함 -> 배열로 관리
+        //    addTodo 함수 안에서 저장도 같이
+        //    로컬스토리지에 저장하려면 이미 저장된 데이터를 불러와서 거기에 추가 필요
+
+        // 3. 새로고침시 로컬 스토리지에 있는 배열이 로드 되어서 화면에 그려져야됨
+        //  = 바로 실행될 렌더함수를 구현
+        //    렌더함수에서 로컬스토리지를 읽어옴 -> 데이터가 없다면? 빈 배열을 쓰기
+        //    읽어온 데이터를 돔으로 렌더링 시켜주기
+
+        // 4. 로컬 스트리지 로드 함수 만들어서 렌더와 addTodo에서 사용하기
+        //    로컬 스토리지 세이브 함수도 만들어서 사용하기
+      </script>
+    </div>
   </body>
 </html>
