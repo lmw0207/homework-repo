@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>fetch로 jsonplaceholder API 호출하기</h1>
+    <script>
+      fetch("https://jsonplaceholder.typicode.com/posts/1")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("HTTP error!");
+          }
+          console.log("요청 성공!");
+          return response.json();
+        })
+        .then((data) => {
+          console.log("결과 데이터:", data);
+        })
+        .catch((error) => console.error(error));
+    </script>
+  </body>
+</html>
