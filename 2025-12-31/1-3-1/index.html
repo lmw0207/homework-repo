@@ -1,9 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>DOM 탐색기 만들기</h1>
+    <div>
+      <button id="myBtn">dd</button>
+    </div>
+
+    <script>
+      const btn = document.querySelector("#myBtn");
+      // querySelectorAll로 사용 했을 때 인덱스 번호를 지정해주면 콘솔에 반환이 되었다.
+      console.log(btn.tagName); // "BUTTON"
+      console.log(btn.id); // "myBtn"
+
+      console.log(btn.parentElement.tagName);
+      // 처음엔 div로 감싸지 않고 해봤을 때는 body가 찍히는 걸 확인
+      console.log(btn.children.tagName);
+    </script>
+  </body>
 </html>
