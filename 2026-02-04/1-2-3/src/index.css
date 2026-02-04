@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #f8fafc;
+}
+.card {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  color: #60a5fa;
+}
+
+.card-desc {
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.post-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #1e293b;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.post-header {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.post-desc {
+  font-size: 1.1rem;
+  color: #f1f5f9;
+  font-weight: 500;
+}
